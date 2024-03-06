@@ -1,0 +1,12 @@
+{
+  "name": "todo-app-ts-advanced",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "format": "prettier \"./**/*.{ts,tsx}\" --write"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4"
+  }
+}
