@@ -2,8 +2,11 @@
   "name": "todo-app-ts-advanced",
   "version": "1.0.0",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "format": "prettier \"./**/*.{ts,tsx}\" --write"
+    "format": "prettier \"./packages/backend/api/**/*.ts\" --write"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
