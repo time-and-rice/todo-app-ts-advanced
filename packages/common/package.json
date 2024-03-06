@@ -1,9 +1,8 @@
 {
-  "name": "common",
+  "name": "@packages/common",
   "version": "1.0.0",
-  "exports": {
-    ".": "./src/index.ts"
-  },
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc"
