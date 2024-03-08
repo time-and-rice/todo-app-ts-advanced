@@ -1,12 +1,12 @@
-import { useState, ChangeEvent } from "react";
-import { gql, useMutation } from "@apollo/client";
-import { TaskUpdateForm } from "./TaskUpdateForm";
 import {
   DeleteTaskDocument,
   GetTasksDocument,
   TaskItemFragment,
   ToggleTaskCompletedDocument,
 } from "@/generated/graphql";
+import { gql, useMutation } from "@apollo/client";
+import { useState } from "react";
+import { TaskUpdateForm } from "./TaskUpdateForm";
 
 gql`
   fragment TaskItem on Task {
@@ -58,11 +58,7 @@ export function TaskItem({ task }: TaskItemProps) {
   };
 
   return isEdit ? (
-    <TaskUpdateForm
-      task={task}
-      onSubmit={() => setIsEdit(false)}
-      onCancel={() => setIsEdit(false)}
-    />
+    <TaskUpdateForm task={task} onSubmit={() => setIsEdit(false)} onCancel={() => setIsEdit(false)} />
   ) : (
     <div
       style={{
@@ -71,11 +67,7 @@ export function TaskItem({ task }: TaskItemProps) {
         gap: "8px",
       }}
     >
-      <input
-        type="checkbox"
-        checked={task.completed}
-        onChange={onChangeCompleted}
-      />
+      <input type="checkbox" checked={task.completed} onChange={onChangeCompleted} />
       <div>{task.title}</div>
       <button onClick={() => setIsEdit(true)}>Edit</button>
       <button onClick={onDelete}>Delete</button>
