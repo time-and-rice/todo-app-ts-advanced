@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import { getAppName } from "@packages/common";
 import type { AppProps } from "next/app";
+import { useEffect } from "react";
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -8,6 +10,10 @@ const client = new ApolloClient({
 });
 
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    console.log(`${getAppName()} frontend ready`);
+  }, []);
+
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />

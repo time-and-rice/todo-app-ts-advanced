@@ -11,6 +11,7 @@
     "gql:gen": "graphql-codegen"
   },
   "dependencies": {
+    "@packages/common": "*",
     "@apollo/client": "^3.9.5",
     "graphql": "^16.8.1",
     "next": "14.1.2",
