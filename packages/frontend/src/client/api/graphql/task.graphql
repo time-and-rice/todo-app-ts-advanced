@@ -1,0 +1,38 @@
+fragment TaskItem on Task {
+  id
+  title
+  completed
+}
+
+query getTasks {
+  tasks {
+    id
+    ...TaskItem
+  }
+}
+
+mutation createTask($title: String!) {
+  createTask(title: $title) {
+    id
+  }
+}
+
+mutation updateTask($taskId: Int!, $title: String!) {
+  updateTask(taskId: $taskId, title: $title) {
+    id
+    title
+  }
+}
+
+mutation deleteTask($taskId: Int!) {
+  deleteTask(taskId: $taskId) {
+    id
+  }
+}
+
+mutation toggleTaskCompleted($taskId: Int!) {
+  toggleTaskCompleted(taskId: $taskId) {
+    id
+    completed
+  }
+}

@@ -1,16 +1,7 @@
-import { gql, useMutation } from "@apollo/client";
-import { FormEvent } from "react";
-import { useTextInput } from "@/hooks/useTextInput";
 import { TaskItemFragment, UpdateTaskDocument } from "@/generated/graphql";
-
-gql`
-  mutation updateTask($taskId: Int!, $title: String!) {
-    updateTask(taskId: $taskId, title: $title) {
-      id
-      title
-    }
-  }
-`;
+import { useTextInput } from "@/hooks/useTextInput";
+import { useMutation } from "@apollo/client";
+import { FormEvent } from "react";
 
 type TaskUpdateFormProps = {
   task: TaskItemFragment;
@@ -18,11 +9,7 @@ type TaskUpdateFormProps = {
   onCancel: () => void;
 };
 
-export function TaskUpdateForm({
-  task,
-  onSubmit,
-  onCancel,
-}: TaskUpdateFormProps) {
+export function TaskUpdateForm({ task, onSubmit, onCancel }: TaskUpdateFormProps) {
   const [updateTask] = useMutation(UpdateTaskDocument);
 
   const titleInput = useTextInput(task.title);

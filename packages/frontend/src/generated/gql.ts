@@ -13,12 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "\n  mutation createTask($title: String!) {\n    createTask(title: $title) {\n      id\n    }\n  }\n": types.CreateTaskDocument,
-    "\n  fragment TaskItem on Task {\n    id\n    title\n    completed\n  }\n": types.TaskItemFragmentDoc,
-    "\n  mutation toggleTaskCompleted($taskId: Int!) {\n    toggleTaskCompleted(taskId: $taskId) {\n      id\n      completed\n    }\n  }\n": types.ToggleTaskCompletedDocument,
-    "\n  mutation deleteTask($taskId: Int!) {\n    deleteTask(taskId: $taskId) {\n      id\n    }\n  }\n": types.DeleteTaskDocument,
-    "\n  mutation updateTask($taskId: Int!, $title: String!) {\n    updateTask(taskId: $taskId, title: $title) {\n      id\n      title\n    }\n  }\n": types.UpdateTaskDocument,
-    "\n  query getTasks {\n    tasks {\n      id\n      ...TaskItem\n    }\n  }\n": types.GetTasksDocument,
+    "mutation createTask($title: String!) {\n  createTask(title: $title) {\n    id\n  }\n}\n\nmutation deleteTask($taskId: Int!) {\n  deleteTask(taskId: $taskId) {\n    id\n  }\n}\n\nmutation toggleTaskCompleted($taskId: Int!) {\n  toggleTaskCompleted(taskId: $taskId) {\n    id\n    completed\n  }\n}\n\nfragment TaskItem on Task {\n  id\n  title\n  completed\n}\n\nmutation updateTask($taskId: Int!, $title: String!) {\n  updateTask(taskId: $taskId, title: $title) {\n    id\n    title\n  }\n}\n\nquery getTasks {\n  tasks {\n    id\n    ...TaskItem\n  }\n}": types.CreateTaskDocument,
 };
 
 /**
@@ -38,27 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "\n  mutation createTask($title: String!) {\n    createTask(title: $title) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation createTask($title: String!) {\n    createTask(title: $title) {\n      id\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  fragment TaskItem on Task {\n    id\n    title\n    completed\n  }\n"): (typeof documents)["\n  fragment TaskItem on Task {\n    id\n    title\n    completed\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation toggleTaskCompleted($taskId: Int!) {\n    toggleTaskCompleted(taskId: $taskId) {\n      id\n      completed\n    }\n  }\n"): (typeof documents)["\n  mutation toggleTaskCompleted($taskId: Int!) {\n    toggleTaskCompleted(taskId: $taskId) {\n      id\n      completed\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation deleteTask($taskId: Int!) {\n    deleteTask(taskId: $taskId) {\n      id\n    }\n  }\n"): (typeof documents)["\n  mutation deleteTask($taskId: Int!) {\n    deleteTask(taskId: $taskId) {\n      id\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  mutation updateTask($taskId: Int!, $title: String!) {\n    updateTask(taskId: $taskId, title: $title) {\n      id\n      title\n    }\n  }\n"): (typeof documents)["\n  mutation updateTask($taskId: Int!, $title: String!) {\n    updateTask(taskId: $taskId, title: $title) {\n      id\n      title\n    }\n  }\n"];
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- */
-export function graphql(source: "\n  query getTasks {\n    tasks {\n      id\n      ...TaskItem\n    }\n  }\n"): (typeof documents)["\n  query getTasks {\n    tasks {\n      id\n      ...TaskItem\n    }\n  }\n"];
+export function graphql(source: "mutation createTask($title: String!) {\n  createTask(title: $title) {\n    id\n  }\n}\n\nmutation deleteTask($taskId: Int!) {\n  deleteTask(taskId: $taskId) {\n    id\n  }\n}\n\nmutation toggleTaskCompleted($taskId: Int!) {\n  toggleTaskCompleted(taskId: $taskId) {\n    id\n    completed\n  }\n}\n\nfragment TaskItem on Task {\n  id\n  title\n  completed\n}\n\nmutation updateTask($taskId: Int!, $title: String!) {\n  updateTask(taskId: $taskId, title: $title) {\n    id\n    title\n  }\n}\n\nquery getTasks {\n  tasks {\n    id\n    ...TaskItem\n  }\n}"): (typeof documents)["mutation createTask($title: String!) {\n  createTask(title: $title) {\n    id\n  }\n}\n\nmutation deleteTask($taskId: Int!) {\n  deleteTask(taskId: $taskId) {\n    id\n  }\n}\n\nmutation toggleTaskCompleted($taskId: Int!) {\n  toggleTaskCompleted(taskId: $taskId) {\n    id\n    completed\n  }\n}\n\nfragment TaskItem on Task {\n  id\n  title\n  completed\n}\n\nmutation updateTask($taskId: Int!, $title: String!) {\n  updateTask(taskId: $taskId, title: $title) {\n    id\n    title\n  }\n}\n\nquery getTasks {\n  tasks {\n    id\n    ...TaskItem\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

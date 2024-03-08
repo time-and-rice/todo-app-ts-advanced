@@ -1,18 +1,9 @@
-import { gql, useQuery } from "@apollo/client";
 import { TaskCreateForm } from "@/components/TaskCreateForm";
 import { TaskItem } from "@/components/TaskItem";
-import { GetTasksDocument, TaskItemFragmentDoc } from "@/generated/graphql";
 import { getFragmentData } from "@/generated";
+import { GetTasksDocument, TaskItemFragmentDoc } from "@/generated/graphql";
+import { useQuery } from "@apollo/client";
 import { useMemo } from "react";
-
-gql`
-  query getTasks {
-    tasks {
-      id
-      ...TaskItem
-    }
-  }
-`;
 
 export default function Home() {
   const { data } = useQuery(GetTasksDocument);

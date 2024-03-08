@@ -4,34 +4,9 @@ import {
   TaskItemFragment,
   ToggleTaskCompletedDocument,
 } from "@/generated/graphql";
-import { gql, useMutation } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import { useState } from "react";
 import { TaskUpdateForm } from "./TaskUpdateForm";
-
-gql`
-  fragment TaskItem on Task {
-    id
-    title
-    completed
-  }
-`;
-
-gql`
-  mutation toggleTaskCompleted($taskId: Int!) {
-    toggleTaskCompleted(taskId: $taskId) {
-      id
-      completed
-    }
-  }
-`;
-
-gql`
-  mutation deleteTask($taskId: Int!) {
-    deleteTask(taskId: $taskId) {
-      id
-    }
-  }
-`;
 
 type TaskItemProps = {
   task: TaskItemFragment;
