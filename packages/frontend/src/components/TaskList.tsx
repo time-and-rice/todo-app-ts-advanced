@@ -1,7 +1,8 @@
 import { getFragmentData } from "@/generated";
-import { GetTasksDocument, TaskItemFragmentDoc } from "@/generated/graphql";
+import { GetTasksDocument, TaskItemFragment, TaskItemFragmentDoc } from "@/generated/graphql";
 import { taskListFilterState } from "@/recoil/atoms/taskListFilterState";
 import { useQuery } from "@apollo/client";
+import { List } from "antd/lib";
 import { useMemo } from "react";
 import { useRecoilState } from "recoil";
 import { TaskItem } from "./TaskItem";
@@ -29,17 +30,14 @@ export function TaskList() {
   return (
     <>
       {filteredTasks.length > 0 ? (
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-          }}
-        >
-          {filteredTasks.map((t) => (
-            <TaskItem key={t.id} task={t} />
-          ))}
-        </div>
+        <List
+          dataSource={filteredTasks as TaskItemFragment[]}
+          renderItem={(t) => (
+            <List.Item>
+              <TaskItem task={t} />
+            </List.Item>
+          )}
+        />
       ) : null}
     </>
   );

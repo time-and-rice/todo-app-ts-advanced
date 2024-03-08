@@ -4,7 +4,9 @@ import {
   TaskItemFragment,
   ToggleTaskCompletedDocument,
 } from "@/generated/graphql";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons/lib";
 import { useMutation } from "@apollo/client";
+import { Button, Checkbox, Flex } from "antd/lib";
 import { useState } from "react";
 import { TaskUpdateForm } from "./TaskUpdateForm";
 
@@ -35,17 +37,20 @@ export function TaskItem({ task }: TaskItemProps) {
   return isEdit ? (
     <TaskUpdateForm task={task} onSubmit={() => setIsEdit(false)} onCancel={() => setIsEdit(false)} />
   ) : (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-      }}
-    >
-      <input type="checkbox" checked={task.completed} onChange={onChangeCompleted} />
-      <div>{task.title}</div>
-      <button onClick={() => setIsEdit(true)}>Edit</button>
-      <button onClick={onDelete}>Delete</button>
-    </div>
+    <Flex align="center" justify="space-between" className="min-w-80">
+      <Flex gap="small">
+        <Checkbox checked={task.completed} onChange={onChangeCompleted} />
+        <div>{task.title}</div>
+      </Flex>
+
+      <Flex gap="small">
+        <Button size="small" onClick={() => setIsEdit(true)}>
+          <EditOutlined />
+        </Button>
+        <Button size="small" onClick={onDelete}>
+          <DeleteOutlined />
+        </Button>
+      </Flex>
+    </Flex>
   );
 }

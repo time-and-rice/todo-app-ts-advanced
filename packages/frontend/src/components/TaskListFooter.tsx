@@ -1,19 +1,29 @@
-import { taskListFilterState } from "@/recoil/atoms/taskListFilterState";
+import { TaskListFilterState, taskListFilterState } from "@/recoil/atoms/taskListFilterState";
+import { Button, Space } from "antd/lib";
+import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 
 export function TaskListFooter() {
-  const [, setTaskListFilter] = useRecoilState(taskListFilterState);
+  const [taskListFilter, setTaskListFilter] = useRecoilState(taskListFilterState);
+
+  const getButtonType = useCallback(
+    (filter: TaskListFilterState) => {
+      return filter === taskListFilter ? "primary" : "default";
+    },
+    [taskListFilter],
+  );
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "8px",
-      }}
-    >
-      <button onClick={() => setTaskListFilter("ALL")}>All</button>
-      <button onClick={() => setTaskListFilter("ACTIVE")}>Active</button>
-      <button onClick={() => setTaskListFilter("COMPLETED")}>Completed</button>
-    </div>
+    <Space>
+      <Button type={getButtonType("ALL")} onClick={() => setTaskListFilter("ALL")}>
+        All
+      </Button>
+      <Button type={getButtonType("ACTIVE")} onClick={() => setTaskListFilter("ACTIVE")}>
+        Active
+      </Button>
+      <Button type={getButtonType("COMPLETED")} onClick={() => setTaskListFilter("COMPLETED")}>
+        Completed
+      </Button>
+    </Space>
   );
 }

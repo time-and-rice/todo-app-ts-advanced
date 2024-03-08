@@ -1,36 +1,37 @@
 import { TaskItemFragment, UpdateTaskDocument } from "@/generated/graphql";
-import { useTextInput } from "@/hooks/useTextInput";
 import { useMutation } from "@apollo/client";
-import { FormEvent } from "react";
+import { Form, Input } from "antd/lib";
+
+type FieldType = {
+  title: string;
+};
 
 type TaskUpdateFormProps = {
   task: TaskItemFragment;
   onSubmit: () => void;
-  onCancel: () => void;
 };
 
-export function TaskUpdateForm({ task, onSubmit, onCancel }: TaskUpdateFormProps) {
+export function TaskUpdateForm({ task, onSubmit }: TaskUpdateFormProps) {
   const [updateTask] = useMutation(UpdateTaskDocument);
 
-  const titleInput = useTextInput(task.title);
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onFinish = async (v: FieldType) => {
     await updateTask({
-      variables: { taskId: task.id, title: titleInput.value },
+      variables: { taskId: task.id, title: v.title },
     });
     onSubmit();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" {...titleInput.bind} />
-      <button type="submit" style={{ marginLeft: "8px" }}>
-        Post
-      </button>
-      <button type="submit" style={{ marginLeft: "8px" }} onClick={onCancel}>
-        Cancel
-      </button>
-    </form>
+    <Form
+      className="min-w-80"
+      initialValues={{
+        title: task.title,
+      }}
+      onFinish={onFinish}
+    >
+      <Form.Item<FieldType> name="title" rules={[{ required: true }]} className="!mb-0">
+        <Input />
+      </Form.Item>
+    </Form>
   );
 }

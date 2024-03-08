@@ -11,8 +11,11 @@
     "gql:gen": "graphql-codegen"
   },
   "dependencies": {
+    "@ant-design/cssinjs": "^1.18.4",
+    "@ant-design/icons": "^5.3.1",
     "@apollo/client": "^3.9.5",
     "@packages/common": "*",
+    "antd": "^5.15.1",
     "graphql": "^16.8.1",
     "next": "14.1.2",
     "react": "^18",

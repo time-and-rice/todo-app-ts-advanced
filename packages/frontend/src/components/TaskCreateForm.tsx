@@ -1,29 +1,30 @@
 import { CreateTaskDocument, GetTasksDocument } from "@/generated/graphql";
-import { useTextInput } from "@/hooks/useTextInput";
 import { useMutation } from "@apollo/client";
-import { FormEvent } from "react";
+import { Form, Input } from "antd/lib";
+
+type FieldType = {
+  title: string;
+};
 
 export function TaskCreateForm() {
+  const [form] = Form.useForm();
+
   const [createTask] = useMutation(CreateTaskDocument, {
     refetchQueries: [GetTasksDocument],
   });
 
-  const titleInput = useTextInput();
-
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onFinish = async (v: FieldType) => {
     await createTask({
-      variables: { title: titleInput.value },
+      variables: v,
     });
-    titleInput.set("");
+    form.resetFields();
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" {...titleInput.bind} />
-      <button type="submit" style={{ marginLeft: "8px" }}>
-        Post
-      </button>
-    </form>
+    <Form form={form} className="min-w-80" onFinish={onFinish}>
+      <Form.Item<FieldType> name="title" rules={[{ required: true }]} className="!mb-0">
+        <Input />
+      </Form.Item>
+    </Form>
   );
 }
